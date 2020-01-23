@@ -46,7 +46,7 @@
 
         registraIntento();
         registraCoincidencia(combinacionJugador);
-        limpiaTablero();
+        limpiaLinea();
     }
     let compruebaEstadoPartida = (cadenaCoincidencia) =>{
         if(cadenaCoincidencia == "1111"){
@@ -78,15 +78,49 @@
         cajaDeCoincidencias.appendChild(divCoincidencia);
         compruebaEstadoPartida(cadenaCoincidencia);
     }
-    let limpiaTablero = ()=>{
+    let limpiaLinea = ()=>{
         for (let miembro of miembros) {
             miembro.src = ruta+"empty.png";
         }
     }
+    let limpiaTablero = () =>{
+        
+        //Esto limpia los dos divs
+        while (cajaDeIntentos.firstChild) {
+          cajaDeIntentos.removeChild(cajaDeIntentos.firstChild);
+        }
+        while (cajaDeCoincidencias.firstChild) {
+            cajaDeCoincidencias.removeChild(cajaDeCoincidencias.firstChild);
+        }
+
+    }
+
+    let inicializarTablero = () =>{
+        let divPanelJugador = document.createElement("div");
+        let color;
+        for (let i = 0; i<masterMind.SECUENCIA;i++) {
+            color = document.createElement("img");
+            color.src=ruta+"empty.png";
+            color.className="miembros";
+            divPanelJugador.appendChild(color);
+        }
+        cajaDeIntentos.appendChild(divPanelJugador);
+        
+        let divCoincidenciasInicial = document.createElement("div");
+        for (let i = 0; i<masterMind.SECUENCIA;i++) {
+            color = document.createElement("img");
+            color.src=ruta+"empty.png";
+            color.className="coincidencia";
+            divCoincidenciasInicial.appendChild(color);
+        }
+        cajaDeCoincidencias.appendChild(divCoincidenciasInicial);
+    }
 
     let reinicioPartida = () =>{
         masterMind.init();
+        limpiaLinea();
         limpiaTablero();
+        inicializarTablero();
     }
 
     let inicio = () => {
