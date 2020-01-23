@@ -1,6 +1,10 @@
 {
-    let ruta = "file://"+window.location.pathname;
-    ruta = ruta.replace("index.html","img/");
+    //Esta ruta para pruebas locales
+    //let ruta = "file://"+window.location.pathname; 
+    //ruta = ruta.replace("index.html","img/");
+
+    //Esta ruta para pruebas en el server github:
+    let ruta = window.location.href+"img/";
 
     let botonesDeColores;
     let miembros;
