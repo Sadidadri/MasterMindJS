@@ -8,6 +8,8 @@
     flex-direction: column;
 }
 #ventanaDeJuego{
+    width: 100vw;
+    height: 90vh;
     display: flex;
 }
 #intentos{
@@ -21,5 +23,5 @@ img{
     flex-direction: column-reverse;
 }
 #coincidenciasUsuario > div > img{
-    width:1rem;
+    width: inherit;
 }

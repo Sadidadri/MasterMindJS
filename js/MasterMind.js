@@ -32,8 +32,8 @@ let masterMind = {
         /**
          * Colores:
          * Null - Nada
-         * -1 - Negro
-         * -2 - Blanco
+         * 1 - Negro
+         * 2 - Blanco
          * 
          */
         let coincidencia = [null,null,null,null];
@@ -42,7 +42,7 @@ let masterMind = {
         //Comprobacion de Negros
         for (let i = 0; i < this.SECUENCIA; i++) {
             if(intento[i] === this.objetivo[i]){
-                coincidencia[i] = -1;
+                coincidencia[i] = 1;
                 intento[i] = null;
                 copiaObjetivo[i] = undefined;
             }
@@ -53,7 +53,7 @@ let masterMind = {
             if(intento[i] != null){
                 for(let j = 0;j< copiaObjetivo.length;j++){
                     if(intento[i] == copiaObjetivo[j]){
-                        coincidencia[i] = -2;
+                        coincidencia[i] = 2;
                         copiaObjetivo[j] = undefined;
                     }
                 }
