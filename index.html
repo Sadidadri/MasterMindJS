@@ -5,11 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>MasterMind</title>
+    <link rel="stylesheet" href="css/main.css">
     <script src="js/MasterMind.js"></script>
     <script src="js/main.js"></script>
 </head>
 <body>
     <noscript>Tu navegador no tiene activado Javascript, actívalo para el correcto funcionamiento de la web</noscript>
-
+    <div id="ventanaDeJuego">
+        <div id="intentos">
+            <div id="intentosUsuario">
+                <div>
+                    <img id="intento1" src="img/empty.png" alt="vacio">
+                    <img id="intento2" src="img/empty.png" alt="vacio">
+                    <img id="intento3" src="img/empty.png" alt="vacio">
+                    <img id="intento4" src="img/empty.png" alt="vacio">
+                </div>
+            </div>
+            <div id="coincidenciasUsuario">
+                <div>
+                    <img src="img/empty.png" alt="vacio">
+                    <img src="img/empty.png" alt="vacio">
+                    <img src="img/empty.png" alt="vacio">
+                    <img src="img/empty.png" alt="vacio">
+                </div>
+            </div>
+        </div>
+        <div id="elegirColores">
+            <img src="img/rojo.png" alt="rojo">
+            <img src="img/blanco.png" alt="blanco">
+            <img src="img/negro.png" alt="negro">
+            <img src="img/amarillo.png" alt="amarillo">
+            <img src="img/naranja.png" alt="naranja">
+            <img src="img/marron.png" alt="marron">
+            <img src="img/azul.png" alt="azul">
+            <img src="img/verde.png" alt="verde">
+        </div>
+    </div>
+    <button id="comprobarJugada">Comprobar Jugada</button>
+    <button id="reiniciarPartida">Reiniciar Partida</button>
 </body>
 </html>
