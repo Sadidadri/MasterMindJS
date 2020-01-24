@@ -54,7 +54,6 @@ let masterMind = {
                 for(let j = 0;j< copiaObjetivo.length;j++){
                     if(intento[i] == copiaObjetivo[j]){
                         coincidencia[i] = 2;
-                        copiaObjetivo[j] = undefined;
                     }
                 }
             }
