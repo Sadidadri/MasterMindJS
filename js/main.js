@@ -1,141 +1,94 @@
 /**
- * Script que gestiona la ventana donde se crea el jeugo masterMind.
+ * Script que se encarga de la interfaz de usuario del juego Master Mind
  * 
  * @author Adrián Ángel Moya Moruno
  */
 {
-    //Esta ruta para pruebas locales
-    //let ruta = "file://"+window.location.pathname; 
-    //ruta = ruta.replace("index.html","img/");
-
-    //Esta ruta para pruebas en el server github:
-    let ruta = window.location.href+"img/";
 
     //Variables
-    let cajaDeIntentos;
-    let cajaDeCoincidencias;
+    let ventanaDeJuego;
+    let panelJugadorInicial;
+    let panelJugador;
+    let linea;
     let botonesDeColores;
     let miembros;
-    let barraCoincidencias;
-    let numerosColor = {"rojo.png":0,"blanco.png":1,"negro.png":2,"amarillo.png":3,"naranja.png":4,"marron.png":5,"azul.png":6,"verde.png":7,1:"negro.png",2:"blanco.png",null:"empty.png"};
+    let numerosColor = {"red":0,"white":1,"black":2,"yellow":3,"orange":4,"brown":5,"blue":6,"green":7,1:"black",2:"white",null:"gray"};
 
-    let rellenaIntento = (e) =>{
-        for (let miembro of miembros) {
-            if(miembro.src == ruta+"empty.png"){
-                miembro.src = e.target.src;
-                return;
-            }
-        }
-        
-    }
-
-    let borraIntento = (e) =>{
-        e.target.src = ruta+"empty.png";
-    }
     let compruebaJugada = () =>{
         let combinacionJugador = [];
-        let colorMiembro;
-        for (let miembro of miembros) {
-            if(miembro.src == ruta+"empty.png"){
-                console.log("Se tienen que llenar los 4 huecos.");
+        for (let i = 0; i < masterMind.NUM_CIRCULOS; i++) {
+            if(miembros[i].getAttribute("fill") === "gray"){
+                alert("Se tienen que llenar los 4 huecos.");
                 return;
             }
-            colorMiembro = miembro.src.replace(ruta,"");
-            combinacionJugador.push(numerosColor[colorMiembro]);
+            combinacionJugador.push(numerosColor[miembros[i].getAttribute("fill")]);
         }
-
-        registraIntento();
+        
         registraCoincidencia(combinacionJugador);
-        limpiaLinea();
+        
     }
-    let compruebaEstadoPartida = (cadenaCoincidencia) =>{
-        if(cadenaCoincidencia == "1111"){
+    let registraCoincidencia = (combinacionJugador) =>{
+        let resultado = masterMind.comprobar(combinacionJugador);
+        for (let i = 0; i < masterMind.NUM_CIRCULOS; i++) {
+            barraCoincidencias[i].setAttribute("fill",numerosColor[resultado[i]]);
+        }
+        registraIntento();
+        limpiaLinea();
+        compruebaEstadoPartida(resultado);
+    }
+    let registraIntento = () =>{
+        let divLinea = linea.cloneNode(true);
+        panelJugador.appendChild(divLinea);
+    }
+    let compruebaEstadoPartida = (arrayIntento) =>{
+        if(JSON.stringify(arrayIntento) === JSON.stringify([1,1,1,1])){ //Stringify permite pasar el array a cadena y asi poder comparar ambos
             console.log("¡Has ganado!");
         }
     }
-
-    let registraIntento = () =>{
-        let divIntento = document.createElement("div");
-        let color;
-        for (let miembro of miembros) {
-            color = document.createElement("img");
-            color.src=miembro.src;
-            divIntento.appendChild(color);
-        }
-        cajaDeIntentos.appendChild(divIntento);
-    }
-    let registraCoincidencia = (combinacionJugador) =>{
-        let cadenaCoincidencia = "";
-        let resultado = masterMind.comprobarCoincidencia(combinacionJugador);
-        let divCoincidencia = document.createElement("div");
-        let color;
-        for (let c of resultado) {
-            color = document.createElement("img");
-            color.src= ruta+numerosColor[c];
-            divCoincidencia.appendChild(color);
-            cadenaCoincidencia += c;
-        }
-        cajaDeCoincidencias.appendChild(divCoincidencia);
-        compruebaEstadoPartida(cadenaCoincidencia);
-    }
     let limpiaLinea = ()=>{
-        for (let miembro of miembros) {
-            miembro.src = ruta+"empty.png";
+        for (let i = 0;i< masterMind.NUM_CIRCULOS;i++) {
+            miembros[i].setAttribute("fill","gray");
+            barraCoincidencias[i].setAttribute("fill","gray");
         }
     }
+
+    let rellenaIntento = (e) =>{
+        for (let i = 0;i< masterMind.NUM_CIRCULOS;i++) {
+            if(miembros[i].getAttribute("fill") === "gray"){
+                miembros[i].setAttribute("fill",e.target.getAttribute("fill"));
+                return;
+            }
+        }
+    }
+    let borraIntento = (e) =>{
+        e.target.setAttribute("fill","gray");
+    }
+
     let limpiaTablero = () =>{
-        
-        //Esto limpia los dos divs
-        while (cajaDeIntentos.firstChild) {
-          cajaDeIntentos.removeChild(cajaDeIntentos.firstChild);
-        }
-        while (cajaDeCoincidencias.firstChild) {
-            cajaDeCoincidencias.removeChild(cajaDeCoincidencias.firstChild);
-        }
-
+        ventanaDeJuego.removeChild(panelJugador);
+        let nuevoPanel = panelJugadorInicial.cloneNode(true);
+        ventanaDeJuego.prepend(nuevoPanel);
     }
-
-    let inicializarTablero = () =>{
-        let divPanelJugador = document.createElement("div");
-        let color;
-        for (let i = 0; i<masterMind.SECUENCIA;i++) {
-            color = document.createElement("img");
-            color.src=ruta+"empty.png";
-            color.className="miembros";
-            divPanelJugador.appendChild(color);
-        }
-        cajaDeIntentos.appendChild(divPanelJugador);
-        
-        let divCoincidenciasInicial = document.createElement("div");
-        for (let i = 0; i<masterMind.SECUENCIA;i++) {
-            color = document.createElement("img");
-            color.src=ruta+"empty.png";
-            color.className="coincidencia";
-            divCoincidenciasInicial.appendChild(color);
-        }
-        cajaDeCoincidencias.appendChild(divCoincidenciasInicial);
-    }
-
-    let reinicioPartida = () =>{
-        masterMind.init();
-        limpiaLinea();
+    let reinicioPartida = function () {
         limpiaTablero();
-        inicializarTablero();
-    }
+        inicio();
+    };
 
     let inicio = () => {
         //Genera una combinacion al abrir el programa
         masterMind.init();
 
         //Obtener elementos del entorno grafico
-        document.getElementById("comprobarJugada").addEventListener("click",compruebaJugada);
-        document.getElementById("reiniciarPartida").addEventListener("click",reinicioPartida);
-        botonesDeColores = document.getElementsByClassName("botonColor");
-        miembros = document.getElementsByClassName("miembros");
-        barraCoincidencias = document.getElementsByClassName("coincidencia")
-        cajaDeIntentos = document.getElementById("intentosUsuario");
-        cajaDeCoincidencias = document.getElementById("coincidenciasUsuario");
-
+        document.getElementById("compruebaBoton").addEventListener("click",compruebaJugada);
+        document.getElementById("botonReinicio").addEventListener("click",reinicioPartida);
+        ventanaDeJuego = document.getElementById("ventanaDeJuego");
+        botonesDeColores = document.getElementsByClassName("paleta");
+        panelJugador = document.getElementById("panelJugador");
+        linea = document.getElementById("linea");
+        miembros = document.getElementsByClassName("elementoCombinacion");
+        barraCoincidencias = document.getElementsByClassName("elementoSolucion")
+        
+        
         //For que añade funcionalidad a los colores de la derecha
         for (let botonColor of botonesDeColores) {
             botonColor.addEventListener("click",rellenaIntento)
@@ -145,7 +98,9 @@
             miembro.addEventListener("click",borraIntento);
         }
 
+        //Hago una copia del juego inicialmente para luego colocarlo en caso de reinicios
+        panelJugadorInicial = panelJugador.cloneNode(true);
     }
 
-    document.addEventListener("DOMContentLoaded",inicio);
+    document.addEventListener("DOMContentLoaded",inicio)
 }

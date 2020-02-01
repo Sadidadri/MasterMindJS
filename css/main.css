@@ -2,26 +2,14 @@
     margin: 0;
     padding: 0;
 }
-
-#elegirColores{
-    display: flex;
-    flex-direction: column;
-}
-#ventanaDeJuego{
-    width: 100vw;
-    height: 90vh;
+#ventanaDeJuego, #linea{
     display: flex;
 }
-#intentos{
-    display: flex;
-}
-img{
-    padding: 3px;
-}
-#intentosUsuario, #coincidenciasUsuario{
+#panelJugador{
     display: flex;
     flex-direction: column-reverse;
 }
-#coincidenciasUsuario > div > img{
-    width: inherit;
+#columnaColores{
+    display: flex;
+    flex-direction: column;
 }

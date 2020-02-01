@@ -12,37 +12,67 @@
 <body>
     <noscript>Tu navegador no tiene activado Javascript, actívalo para el correcto funcionamiento de la web</noscript>
     <div id="ventanaDeJuego">
-        <div id="intentos">
-            <div id="intentosUsuario">
-                <div>
-                    <img class="miembros" src="img/empty.png" alt="vacio">
-                    <img class="miembros" src="img/empty.png" alt="vacio">
-                    <img class="miembros" src="img/empty.png" alt="vacio">
-                    <img class="miembros" src="img/empty.png" alt="vacio">
+        <div id="panelJugador">
+            <div id="linea">
+                <div id="cajaCombinacion">
+                    <svg  height="70" width="70">
+                        <circle class="elementoCombinacion" cx="35" cy="35" r="20" stroke="black" stroke-width="2" fill="gray"/>
+                    </svg>
+                    <svg height="70" width="70">
+                        <circle class="elementoCombinacion" cx="35" cy="35" r="20" stroke="black" stroke-width="2" fill="gray" />
+                    </svg>
+                    <svg height="70" width="70">
+                        <circle class="elementoCombinacion" cx="35" cy="35" r="20" stroke="black" stroke-width="2" fill="gray" />
+                    </svg>
+                    <svg height="70" width="70">
+                        <circle class="elementoCombinacion" cx="35" cy="35" r="20" stroke="black" stroke-width="2" fill="gray" />
+                    </svg>
                 </div>
-            </div>
-            <div id="coincidenciasUsuario">
-                <div>
-                    <img class="coincidencia" src="img/empty.png" alt="vacio">
-                    <img class="coincidencia" src="img/empty.png" alt="vacio">
-                    <img class="coincidencia" src="img/empty.png" alt="vacio">
-                    <img class="coincidencia" src="img/empty.png" alt="vacio">
+                <div id="cajaSolucion">
+                    <svg height="70" width="70">
+                        <circle class="elementoSolucion" cx="35" cy="35" r="10" stroke="black" stroke-width="2" fill="gray" />
+                    </svg>
+                    <svg height="70" width="70">
+                        <circle class="elementoSolucion" cx="35" cy="35" r="10" stroke="black" stroke-width="2" fill="gray" />
+                    </svg>
+                    <svg height="70" width="70">
+                        <circle class="elementoSolucion" cx="35" cy="35" r="10" stroke="black" stroke-width="2" fill="gray" />
+                    </svg>
+                    <svg height="70" width="70">
+                        <circle class="elementoSolucion" cx="35" cy="35" r="10" stroke="black" stroke-width="2" fill="gray" />
+                    </svg>
                 </div>
             </div>
         </div>
-        <div id="elegirColores">
-            <img class="botonColor" src="img/rojo.png" alt="rojo">
-            <img class="botonColor" src="img/blanco.png" alt="blanco">
-            <img class="botonColor" src="img/negro.png" alt="negro">
-            <img class="botonColor" src="img/amarillo.png" alt="amarillo">
-            <img class="botonColor" src="img/naranja.png" alt="naranja">
-            <img class="botonColor" src="img/marron.png" alt="marron">
-            <img class="botonColor" src="img/azul.png" alt="azul">
-            <img class="botonColor" src="img/verde.png" alt="verde">
+        <div id="panelColores">
+            <div id="columnaColores">
+                <svg height="70" width="70">
+                    <circle class="paleta" cx="35" cy="35" r="25" stroke="black" stroke-width="2" fill="red" />
+                </svg>
+                <svg height="70" width="70">
+                    <circle class="paleta" cx="35" cy="35" r="25" stroke="black" stroke-width="2" fill="white" />
+                </svg>
+                <svg height="70" width="70">
+                    <circle class="paleta" cx="35" cy="35" r="25" stroke="black" stroke-width="2" fill="black" />
+                </svg>
+                <svg height="70" width="70">
+                    <circle class="paleta" cx="35" cy="35" r="25" stroke="black" stroke-width="2" fill="yellow" />
+                </svg><svg height="70" width="70">
+                    <circle class="paleta" cx="35" cy="35" r="25" stroke="black" stroke-width="2" fill="orange" />
+                </svg>
+                <svg height="70" width="70">
+                    <circle class="paleta" cx="35" cy="35" r="25" stroke="black" stroke-width="2" fill="brown" />
+                </svg>
+                <svg height="70" width="70">
+                    <circle class="paleta" cx="35" cy="35" r="25" stroke="black" stroke-width="2" fill="blue" />
+                </svg>
+                <svg height="70" width="70">
+                    <circle class="paleta" cx="35" cy="35" r="25" stroke="black" stroke-width="2" fill="green" />
+                </svg>
+                <button id="compruebaBoton">Comprobar</button>
+                <button id="botonReinicio">Reinicio</button>
+            </div>
         </div>
     </div>
-    
-    <button id="comprobarJugada">Comprobar Jugada</button>
-    <button id="reiniciarPartida">Reiniciar Partida</button>
 </body>
 </html>
