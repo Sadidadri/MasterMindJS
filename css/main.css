@@ -5,9 +5,29 @@
 #ventanaDeJuego, #linea{
     display: flex;
 }
+#ventanaDeJuego{
+    justify-content: center;
+}
 #panelJugador{
+    overflow-y: scroll;
+    height: 100vh;
     display: flex;
     flex-direction: column-reverse;
+}
+#panelJugador,#panelColores{
+    background-color: lightcoral;
+}
+
+#compruebaBoton{
+    margin: 1em auto;
+    min-height: 3.5rem;
+}    
+
+#botonReinicio{
+    
+    margin: 1em auto;
+    width: 80%;
+    min-height: 2rem;
 }
 #columnaColores{
     display: flex;

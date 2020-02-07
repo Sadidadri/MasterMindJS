@@ -39,6 +39,7 @@
     let registraIntento = () =>{
         let divLinea = linea.cloneNode(true);
         panelJugador.appendChild(divLinea);
+        //panelJugador.insertBefore(divLinea,linea);
     }
     let compruebaEstadoPartida = (arrayIntento) =>{
         if(JSON.stringify(arrayIntento) === JSON.stringify([1,1,1,1])){ //Stringify permite pasar el array a cadena y asi poder comparar ambos
