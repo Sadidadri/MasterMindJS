@@ -6,6 +6,8 @@
 {
 
     //Variables
+    let modal;
+    let botonCerrar;
     let ventanaDeJuego;
     let panelJugadorInicial;
     let panelJugador;
@@ -39,11 +41,12 @@
     let registraIntento = () =>{
         let divLinea = linea.cloneNode(true);
         panelJugador.appendChild(divLinea);
+        
         //panelJugador.insertBefore(divLinea,linea);
     }
     let compruebaEstadoPartida = (arrayIntento) =>{
         if(JSON.stringify(arrayIntento) === JSON.stringify([1,1,1,1])){ //Stringify permite pasar el array a cadena y asi poder comparar ambos
-            console.log("¡Has ganado!");
+            modal.style.display = "block";
         }
     }
     let limpiaLinea = ()=>{
@@ -73,22 +76,35 @@
     let reinicioPartida = function () {
         limpiaTablero();
         inicio();
+        modal.style.display = "none";
     };
 
     let inicio = () => {
         //Genera una combinacion al abrir el programa
         masterMind.init();
 
+        //Testeo
+        console.log("Para testeos, convierto el array de numeros a colores");
+        let numeroAColor = {0:"rojo",1:"blanco",2:"negro",3:"amarillo",4:"naranja",5:"marron",6:"azul",7:"verde"};
+        let combinacionGanadoraColores = "[";
+        for (const numero of masterMind.mostrar()) {
+            combinacionGanadoraColores += numeroAColor[numero]+"|";
+        }
+        console.log(combinacionGanadoraColores+"]");
+        //Fin Testeo
+
         //Obtener elementos del entorno grafico
         document.getElementById("compruebaBoton").addEventListener("click",compruebaJugada);
         document.getElementById("botonReinicio").addEventListener("click",reinicioPartida);
+        botonCerrar = document.getElementById("botonCerrar");
         ventanaDeJuego = document.getElementById("ventanaDeJuego");
         botonesDeColores = document.getElementsByClassName("paleta");
         panelJugador = document.getElementById("panelJugador");
         linea = document.getElementById("linea");
         miembros = document.getElementsByClassName("elementoCombinacion");
         barraCoincidencias = document.getElementsByClassName("elementoSolucion")
-        
+        modal = document.getElementById("myModal");
+        botonCerrar.addEventListener("click",() => {window.close()});
         
         //For que añade funcionalidad a los colores de la derecha
         for (let botonColor of botonesDeColores) {
